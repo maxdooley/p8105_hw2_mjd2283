@@ -15,7 +15,7 @@ mr_trash_df =
   mutate(
     sports_balls = as.integer(round(sports_balls)),
     year = as.numeric(year),
-    wheel = "A")
+    wheel = "Mr Trash")
 
 professor_trash_df =
   readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M139") |>
@@ -23,17 +23,19 @@ professor_trash_df =
   drop_na(dumpster) |>
   mutate(
     plastic_bottles = as.numeric(plastic_bottles),
-    wheel = "B")
+    wheel = "Professor Trash")
 
 gwynnda_df = 
   readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda the Good Wheel of the W", range = "A2:L394") |>
   janitor::clean_names() |>
   drop_na(dumpster) |>
-  mutate(wheel = "C")
+  mutate(wheel = "Gwynnda")
 
 combined_df =
   bind_rows(mr_trash_df, professor_trash_df, gwynnda_df) |> 
   relocate(wheel)
+
+view(combined_df)
 
 #went from A2 headers to N742 last row of possible data excluding the totals row
 #also added the sheet option
@@ -45,26 +47,6 @@ combined_df =
 #years can't combine in between sheets so need to fix
 #also similar issue with plastic bottles
 
-
+#clarifying names
 ```
 
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
