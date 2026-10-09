@@ -17,7 +17,11 @@ trash_df =
     wheel = "A")
 
 trash_df =
-  readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Mr.Trash Wheel", range = "A2:N742") |>
+  readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M139") |>
+  janitor::clean_names() |>
+  drop_na(dumpster) |>
+  mutate(sports_balls = as.integer(round(sports_balls)),
+    wheel = "B")
 
 
 #went from A2 headers to N742 last row of possible data excluding the totals row
