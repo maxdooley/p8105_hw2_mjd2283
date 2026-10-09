@@ -35,7 +35,7 @@ combined_df =
   bind_rows(mr_trash_df, professor_trash_df, gwynnda_df) |> 
   relocate(trash_wheel)
 
-view(combined_df)
+combined_df
 
 #went from A2 headers to N742 last row of possible data excluding the totals row
 #also added the sheet option
@@ -48,6 +48,17 @@ view(combined_df)
 #also similar issue with plastic bottles
 
 #clarifying names
+```
+```{r}
+
+total_weight_professor = 
+  combined_df |>
+  filter(trash_wheel == "Professor Trash") |>
+  pull(weight_tons) |>
+  sum(na.rm = TRUE)
+
+print(total_weight_professor)
+
 ```
 
 
