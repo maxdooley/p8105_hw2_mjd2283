@@ -14,13 +14,16 @@ mr_trash_df =
   drop_na(dumpster) |>
   mutate(
     sports_balls = as.integer(round(sports_balls)),
+    year = as.numeric(year),
     wheel = "A")
 
 professor_trash_df =
   readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M139") |>
   janitor::clean_names() |>
   drop_na(dumpster) |>
-  mutate(wheel = "B")
+  mutate(
+    plastic_bottles = as.numeric(plastic_bottles),
+    wheel = "B")
 
 gwynnda_df = 
   readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda the Good Wheel of the W", range = "A2:L394") |>
@@ -40,6 +43,8 @@ combined_df =
 #labeling each trash wheel as different names
 
 #years can't combine in between sheets so need to fix
+#also similar issue with plastic bottles
+
 
 ```
 
