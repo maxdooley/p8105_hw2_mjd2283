@@ -9,11 +9,23 @@ output: html_document
 library(tidyverse)
 
 trash_df = 
-  readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", range = "A2:N742") |>
-  janitor::clean_names()
+  readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Mr.Trash Wheel", range = "A2:N742") |>
+  janitor::clean_names() |>
+  drop_na(dumpster) |>
+  mutate(
+    sports_balls = as.integer(round(sports_balls)),
+    wheel = "A")
+
+trash_df =
+  readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Mr.Trash Wheel", range = "A2:N742") |>
+
 
 #went from A2 headers to N742 last row of possible data excluding the totals row
+#also added the sheet option
 #clean names makes it snake case
+
+#only including dumpster rows (drop_na), mutating so that the number of sports balls is rounded
+#labeling each trash wheel as different names
 
 ```
 
