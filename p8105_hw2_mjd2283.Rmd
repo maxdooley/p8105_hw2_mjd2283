@@ -77,10 +77,20 @@ In line R code here!
 
 ```{r}
 
-mci_baseline_df =
+baseline_df =
+  read_csv("./data_mci/MCI_baseline.csv", 
+    skip = 1, na = c (".", "NA", ""))
+  janitor::clean_names(baseline_df)
   
+new_df
+
+participants = nrow(baseline_df)
+developed_mci = nrow(new_df)
   
-mci_amlyoid_df =
+amlyoid_df =
+  read_csv("./data_mci/MCI_amyloid.csv",
+    skip = 1, na = c (".", "NA", ""))
+  janitor::clean_names(amlyoid_df)
 
 ```
 
