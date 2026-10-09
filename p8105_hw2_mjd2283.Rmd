@@ -59,6 +59,14 @@ total_weight_professor =
 
 print(total_weight_professor)
 
+total_cigarette_gwynnda =
+  combined_df |> 
+  filter(trash_wheel == "Gwynnda") |>
+  pull(cigarette_butts) |>
+  sum(na.rm = TRUE)
+  
+print(total_cigarette_gwynnda)
+
 ```
 
 
