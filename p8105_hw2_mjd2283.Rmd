@@ -15,7 +15,7 @@ mr_trash_df =
   mutate(
     sports_balls = as.integer(round(sports_balls)),
     year = as.numeric(year),
-    wheel = "Mr Trash")
+    trash_wheel = "Mr Trash")
 
 professor_trash_df =
   readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M139") |>
@@ -23,17 +23,17 @@ professor_trash_df =
   drop_na(dumpster) |>
   mutate(
     plastic_bottles = as.numeric(plastic_bottles),
-    wheel = "Professor Trash")
+    trash_wheel = "Professor Trash")
 
 gwynnda_df = 
   readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda the Good Wheel of the W", range = "A2:L394") |>
   janitor::clean_names() |>
   drop_na(dumpster) |>
-  mutate(wheel = "Gwynnda")
+  mutate(trash_wheel = "Gwynnda")
 
 combined_df =
   bind_rows(mr_trash_df, professor_trash_df, gwynnda_df) |> 
-  relocate(wheel)
+  relocate(trash_wheel)
 
 view(combined_df)
 
@@ -49,4 +49,7 @@ view(combined_df)
 
 #clarifying names
 ```
+
+
+
 
