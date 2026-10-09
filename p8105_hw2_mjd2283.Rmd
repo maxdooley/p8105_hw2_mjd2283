@@ -5,6 +5,8 @@ date: "2026-10-09"
 output: html_document
 ---
 
+#Problem 2
+
 ```{r}
 library(tidyverse)
 
@@ -61,7 +63,7 @@ print(total_weight_professor)
 
 total_cigarette_gwynnda =
   combined_df |> 
-  filter(trash_wheel == "Gwynnda") |>
+  filter(trash_wheel == "Gwynnda", month == "June", year == "2022") |>
   pull(cigarette_butts) |>
   sum(na.rm = TRUE)
   
@@ -69,6 +71,18 @@ print(total_cigarette_gwynnda)
 
 ```
 
+In line R code here!
+
+#Problem 3
+
+```{r}
+
+mci_baseline_df =
+  
+  
+mci_amlyoid_df =
+
+```
 
 
 
