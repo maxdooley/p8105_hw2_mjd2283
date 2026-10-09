@@ -1,0 +1,39 @@
+---
+title: "p8105_hw2_mjd2283"
+author: "Max"
+date: "2026-10-09"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+
+trash_df = 
+  readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", range = "A2:N742") |>
+  janitor::clean_names()
+
+#went from A2 headers to N742 last row of possible data excluding the totals row
+#clean names makes it snake case
+
+```
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
