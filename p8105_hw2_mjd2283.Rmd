@@ -8,13 +8,13 @@ output: html_document
 ```{r}
 library(tidyverse)
 
-trash_df = 
+mr_trash_df = 
   readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:N742") |>
   janitor::clean_names() |>
   drop_na(dumpster) |>
   mutate(
-    sports = as.integer(round(sports_balls),
-    wheel = "A"))
+    sports_balls = as.integer(round(sports_balls)),
+    wheel = "A")
 
 professor_trash_df =
   readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", range = "A2:M139") |>
@@ -23,10 +23,14 @@ professor_trash_df =
   mutate(wheel = "B")
 
 gwynnda_df = 
-  readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda the Good Wheel of W", range = "A2:L394") |>
+  readxl::read_excel("./202610 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda the Good Wheel of the W", range = "A2:L394") |>
   janitor::clean_names() |>
-    drop_na(dumpster) |>
-    mutate(wheel = "C")
+  drop_na(dumpster) |>
+  mutate(wheel = "C")
+
+combined_df =
+  bind_rows(mr_trash_df, professor_trash_df, gwynnda_df) |> 
+  relocate(wheel)
 
 #went from A2 headers to N742 last row of possible data excluding the totals row
 #also added the sheet option
@@ -34,6 +38,8 @@ gwynnda_df =
 
 #only including dumpster rows (drop_na), mutating so that the number of sports balls is rounded
 #labeling each trash wheel as different names
+
+#years can't combine in between sheets so need to fix
 
 ```
 
