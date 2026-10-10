@@ -79,13 +79,36 @@ In line R code here!
 
 baseline_df =
   read_csv("./data_mci/MCI_baseline.csv", 
-    skip = 1, na = c (".", "NA", ""))
-  janitor::clean_names(baseline_df)
+    skip = 1, na = c (".", "NA", "")) |>
+  janitor::clean_names() |>
+  mutate(
+    sex = case_match(
+        sex, 
+        1 ~ "male", 
+        0 ~ "female"),
+    sex = as.factor(sex),
+    apoe4 = case_match(
+      apoe4, 
+        1 ~ "carrier", 
+        0 ~ "non-carrier"),
+    apoe4 = as.factor(apoe4)) |>
+  filter(is.na(age_at_onset) | age_at_onset > current_age)
+
+#using case match to ensure not numeric 
   
+#labeled it as characters and then used as.factor to turn it to a factor
+
+#used filter() to remove participants who do not meet stated inclusion criteria
+
+recruited = nrow(baseline_df)
+developed_mci =
+mean_age =
+women_apoe4 =
+
+
 new_df
 
-participants = nrow(baseline_df)
-developed_mci = nrow(new_df)
+
   
 amlyoid_df =
   read_csv("./data_mci/MCI_amyloid.csv",
