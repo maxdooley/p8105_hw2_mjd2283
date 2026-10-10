@@ -63,6 +63,12 @@ a_train_stations =
   distinct(line, station_name) |>
   nrow()
 
+ada_compliant = 
+  transit_long |>
+  filter(route_name == "A", ada == "TRUE") |>
+  distinct(line, station_name) |>
+  nrow()
+
 ```
 
 `transit_df` contains 1868 rows showing an entrance or exit and 19 columns. At each one, the dataset tells us the `line`, `station_name`, `station latitude`,`station_longitude`, route numbers among other information. So far, I've converted all my route#s to be characters since 8 through 11 were not. In addition, I selected certain variables to retain as mentioned in the problem. I also used case_match to change the variable entry from yes and no to true and false. 
@@ -71,7 +77,7 @@ Data is not tidy since every route is its own column.
 
 There are `r stations` distinct stations, and out of those, there are `r ada` stations that are ADA compliant. The proportion of station entrances/exits without vending allow entrance is `r prop_no_vending_entry`
 
-Stations that serve the A train are `r a_train_stations`
+Stations that serve the A train are `r a_train_stations`, and out of those, `r ada_compliant` are ADA compliant. 
 
 
 #Problem 2
