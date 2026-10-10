@@ -71,7 +71,7 @@ print(total_cigarette_gwynnda)
 
 ```
 
-The combined dataset has 'r nrow(combined_df)' observations and 'r col(combined_df) categories from Mr. Trash Wheel, Professor Trash Wheel, and Gwynnda. Key variables in this combined dataset include 'weight_tons', 'volume_cubic_yards', 'plastic_bottles', 'polystyrene', 'cigarette_butts', 'glass_bottles', 'plastic_bags', 'wrappers', 'sports_balls', and 'homes_powered.' Also information on month, date, and year is given. The total weight collected by Professor Trash Wheel was 249.96 tons, and the total number of cig butts collected by Gwynnda in June of 2022 was 18120. 
+The combined dataset has `r nrow(combined_df)` observations and `r ncol(combined_df)` categories from Mr. Trash Wheel, Professor Trash Wheel, and Gwynnda. Key variables in this combined dataset include `weight_tons`, `volume_cubic_yards`, `plastic_bottles`, `polystyrene`, `cigarette_butts`, `glass_bottles`, `plastic_bags`, `wrappers`, `sports_balls`, and `homes_powered`. Also information on month, date, and year is given. The total weight collected by Professor Trash Wheel was 249.96 tons, and the total number of cig butts collected by Gwynnda in June of 2022 was 18120. 
 
 #Problem 3
 
@@ -141,6 +141,8 @@ amyloid_df =
     visit = replace(visit, visit == "baseline", "time_0"),
     visit = factor(visit)) 
 
+amyloid_df
+
 #pivot_longer to change so visits all under one column and values under another
 
 n_baseline_only =
@@ -168,10 +170,9 @@ write_csv(mci_df, "./data_mci/mci_combined.csv")
 mci_df
 
 ```
-The remaining dataset contains id values across visits including time_0 which is baseline and then up to time_8.
+The `baseline_df` is 479 id participants long and includes variables such as current_age, sex, education, APOE4, and age_at_onset. In comparison, the `amyloid_df` is  2435 rows long representing id participants at baseline `time_0` to `time_8`. 
 
-8 participants are labeled only in the baseline dataset.
-16 participants are labeled only in the amyloid dataset.
+The `mci_df` contains id values across visits including time_0 which is baseline and then up to time_8, while keeping the overall structure of `baseline_df` with id being the first column. 8 participants are labeled only in the `n_baseline_only`. 16 participants are labeled only in the `n_amyloid_only`.
 
 
 
