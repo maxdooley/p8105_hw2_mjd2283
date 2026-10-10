@@ -77,6 +77,8 @@ In line R code here!
 
 ```{r}
 
+library(tidyverse)
+
 baseline_original=
   read_csv("./data_mci/MCI_baseline.csv", 
     skip = 1, na = c (".", "NA", "")) |>
@@ -107,10 +109,10 @@ recruited = nrow(baseline_original)
 included = nrow(baseline_df)
 developed_mci = 
   baseline_df |>
-  filter(is.na(age_at_onset)) |>
-  pull(id)
+  filter(!is.na(age_at_onset)) |>
+  pull(id) |>
   length()
-mean_age = mean(baseline_df$`Current Age`)
+mean_age = mean(baseline_df$current_age, na.rm = TRUE)
 
 baseline_df
   
@@ -124,13 +126,23 @@ filter(sex == "female") |>
 
 #finding proportion by classifying APOE4 as either True or False so 1 or 0 and then finding the mean. Used AI to help with code reasoning here
   
-amlyoid_df =
+amyloid_df =
   read_csv("./data_mci/MCI_amyloid.csv",
-    skip = 1, na = c (".", "NA", ""))
-  janitor::clean_names()
+    skip = 1, na = c (".", "NA", "")) |>
+  janitor::clean_names() |>
   rename(id = study_id) |> 
+  pivot_longer(baseline:time_8,
+    names_to = "visit",
+    values_to = "amyloid_ratio") |>
+   mutate(
+    visit = replace(visit, visit == "baseline", "time_0"),
+    visit = factor(visit)) 
 
-amlyoid_df
+#pivot_longer to change so visits all under one column and values under another
+
+amyloid_df
+
+
   
   
 new_df
