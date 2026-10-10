@@ -127,7 +127,10 @@ filter(sex == "female") |>
 amlyoid_df =
   read_csv("./data_mci/MCI_amyloid.csv",
     skip = 1, na = c (".", "NA", ""))
-  janitor::clean_names(amlyoid_df)
+  janitor::clean_names()
+  rename(id = study_id) |> 
+
+amlyoid_df
   
   
 new_df
