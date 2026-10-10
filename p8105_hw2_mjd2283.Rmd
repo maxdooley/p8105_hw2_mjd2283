@@ -71,7 +71,6 @@ print(total_cigarette_gwynnda)
 
 ```
 
-In line R code here!
 
 #Problem 3
 
@@ -168,10 +167,10 @@ write_csv(mci_df, "./data_mci/mci_combined.csv")
 mci_df
 
 ```
-The remaining dataset contains id values across visits including time_0 which is baseline and then up to time_8
+The remaining dataset contains id values across visits including time_0 which is baseline and then up to time_8.
 
-8 participants are labeled only in the baseline dataset
-16 participants are labeled only in the amyloid dataset
+8 participants are labeled only in the baseline dataset.
+16 participants are labeled only in the amyloid dataset.
 
 
 
