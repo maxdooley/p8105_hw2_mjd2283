@@ -6,7 +6,10 @@ output: github_document
 ---
 #Problem 1
 
+
 ```{r}
+
+library(tidyverse)
 
 transit_df = 
   read_csv(
@@ -16,18 +19,20 @@ transit_df =
       Route9 = col_character(),
       Route10 = col_character(),
       Route11 = col_character())) |>
-  janitor::clean_names() 
+  janitor::clean_names() |>
   select(
-    line, station_name, station_latitude, route1:route11, entry, vending, entrance_type, ada)
-  
-  
+    line, station_name, station_latitude, route1:route11, entry, vending, entrance_type, ada) |>
+  mutate(entry = case_match(entry, "Yes" ~ TRUE, "NO" ~ FALSE))
 transit_df
 
-#used col_types since when I first ran it, it doesnt have route 8 through 11 as chr so made this change
+#used col_types since when I first ran it, it doesn't have route 8 through 11 as chr so made this change
 
+#used case_match to change entry to TRUE or FALSE
 
 
 ```
+
+`transit_df` contains
 
 
 #Problem 2
