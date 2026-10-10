@@ -104,8 +104,17 @@ baseline_df =
 #used filter() to remove participants who do not meet stated inclusion criteria
 
 recruited = nrow(baseline_original)
-developed_mci = nrow(baseline_df)
-mean_current_age = mean(baseline_df$`Current Age`)
+included = nrow(baseline_df)
+developed_mci = 
+  baseline_df |>
+  filter(is.na(age_at_onset)) |>
+  pull(id)
+  length()
+mean_age = mean(baseline_df$`Current Age`)
+
+baseline_df
+  
+#For this question, filtered out those had NA in the age_at_onset meaning they didn't develop MCI. Used AI to help with this approach
 
 women_apoe4 = baseline_df |>
 filter(sex == "female") |>
@@ -113,15 +122,15 @@ filter(sex == "female") |>
   pull(gene) |>
   mean()
 
-#finding proportion by classifying APOE4 as either True or False so 1 or 0 and then finding the mean. Used AI to help with coding reasoning here
-
-
-new_df
+#finding proportion by classifying APOE4 as either True or False so 1 or 0 and then finding the mean. Used AI to help with code reasoning here
   
 amlyoid_df =
   read_csv("./data_mci/MCI_amyloid.csv",
     skip = 1, na = c (".", "NA", ""))
   janitor::clean_names(amlyoid_df)
+  
+  
+new_df
 
 ```
 
