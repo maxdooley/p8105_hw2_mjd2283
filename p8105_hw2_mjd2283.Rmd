@@ -2,7 +2,7 @@
 title: "p8105_hw2_mjd2283"
 author: "Max"
 date: "2026-10-09"
-output: html_document
+output: github_document
 ---
 
 #Problem 2
@@ -71,6 +71,7 @@ print(total_cigarette_gwynnda)
 
 ```
 
+The combined dataset has 'r nrow(combined_df)' observations and 'r col(combined_df) categories from Mr. Trash Wheel, Professor Trash Wheel, and Gwynnda. Key variables in this combined dataset include 'weight_tons', 'volume_cubic_yards', 'plastic_bottles', 'polystyrene', 'cigarette_butts', 'glass_bottles', 'plastic_bags', 'wrappers', 'sports_balls', and 'homes_powered.' Also information on month, date, and year is given. The total weight collected by Professor Trash Wheel was 249.96 tons, and the total number of cig butts collected by Gwynnda in June of 2022 was 18120. 
 
 #Problem 3
 
