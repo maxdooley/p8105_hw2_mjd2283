@@ -116,7 +116,7 @@ mean_age = mean(baseline_df$current_age, na.rm = TRUE)
 
 baseline_df
   
-#For this question, filtered out those had NA in the age_at_onset meaning they didn't develop MCI. Used AI to help with this approach
+#For this question, kept people with non missing values for age at onset. They developed MCI. Used AI to help with this approach
 
 women_apoe4 = baseline_df |>
 filter(sex == "female") |>
@@ -163,7 +163,9 @@ n_amyloid_only
 
 mci_df = inner_join(baseline_df, amyloid_df, by = "id")
 
-
+write_csv(mci_df, "./data_mci/mci_combined.csv")
+  
+mci_df
 
 ```
 The remaining dataset contains id values across visits including time_0 which is baseline and then up to time_8
