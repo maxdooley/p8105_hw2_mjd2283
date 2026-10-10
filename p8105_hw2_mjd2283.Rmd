@@ -22,7 +22,7 @@ transit_df =
   janitor::clean_names() |>
   select(
     line, station_name, station_latitude, station_longitude, route1:route11, entry, vending, entrance_type, ada) |>
-  mutate(entry = case_match(entry, "Yes" ~ TRUE, "NO" ~ FALSE))
+  mutate(entry = case_match(entry, "YES" ~ TRUE, "NO" ~ FALSE))
 transit_df
 
 #used col_types since when I first ran it, it doesn't have route 8 through 11 as chr so made this change
@@ -54,11 +54,12 @@ transit_long =
     values_to = "route_name")
 
 #Reformatted routes by using pivot_longer, making the column route_number and the values under the route names. Used AI to help with this approach
-
-
+  
 ```
 
 `transit_df` contains 1868 rows showing an entrance or exit and 19 columns. At each one, the dataset tells us the `line`, `station_name`, `station latitude`,`station_longitude`, route numbers among other information. So far, I've converted all my route#s to be characters since 8 through 11 were not. In addition, I selected certain variables to retain as mentioned in the problem. I also used case_match to change the variable entry from yes and no to true and false. 
+
+Data is not tidy since every route is its own column.
 
 There are `r stations` distinct stations, and out of those, there are `r ada` stations that are ADA compliant. The proportion of station entrances/exits without vending allow entrance is `r prop_no_vending_entry`
 
