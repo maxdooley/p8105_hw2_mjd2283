@@ -44,11 +44,23 @@ prop_no_vending_entry =
   pull(entry) |>
   mean()
 
+#A train question
+
+transit_long =
+  transit_df |>
+  pivot_longer(
+    route1:route11,
+    names_to = "route_number",
+    values_to = "route_name")
+
+#Reformatted routes by using pivot_longer, making the column route_number and the values under the route names. Used AI to help with this approach
 
 
 ```
 
 `transit_df` contains 1868 rows showing an entrance or exit and 19 columns. At each one, the dataset tells us the `line`, `station_name`, `station latitude`,`station_longitude`, route numbers among other information. So far, I've converted all my route#s to be characters since 8 through 11 were not. In addition, I selected certain variables to retain as mentioned in the problem. I also used case_match to change the variable entry from yes and no to true and false. 
+
+There are `r stations` distinct stations, and out of those, there are `r ada` stations that are ADA compliant. The proportion of station entrances/exits without vending allow entrance is `r prop_no_vending_entry`
 
 
 
