@@ -4,6 +4,31 @@ author: "Max"
 date: "2026-10-09"
 output: github_document
 ---
+#Problem 1
+
+```{r}
+
+transit_df = 
+  read_csv(
+    "./NYC_Transit_Subway_Entrance_And_Exit_Data.csv",
+    col_types = cols(
+      Route8 = col_character(),
+      Route9 = col_character(),
+      Route10 = col_character(),
+      Route11 = col_character())) |>
+  janitor::clean_names() 
+  select(
+    line, station_name, station_latitude, route1:route11, entry, vending, entrance_type, ada)
+  
+  
+transit_df
+
+#used col_types since when I first ran it, it doesnt have route 8 through 11 as chr so made this change
+
+
+
+```
+
 
 #Problem 2
 
