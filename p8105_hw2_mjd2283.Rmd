@@ -77,10 +77,13 @@ In line R code here!
 
 ```{r}
 
-baseline_df =
+baseline_original=
   read_csv("./data_mci/MCI_baseline.csv", 
     skip = 1, na = c (".", "NA", "")) |>
-  janitor::clean_names() |>
+    janitor::clean_names() 
+
+baseline_df =
+  baseline_original |>
   mutate(
     sex = case_match(
         sex, 
@@ -100,15 +103,20 @@ baseline_df =
 
 #used filter() to remove participants who do not meet stated inclusion criteria
 
-recruited = nrow(baseline_df)
-developed_mci =
-mean_age =
-women_apoe4 =
+recruited = nrow(baseline_original)
+developed_mci = nrow(baseline_df)
+mean_current_age = mean(baseline_df$`Current Age`)
+
+women_apoe4 = baseline_df |>
+filter(sex == "female") |>
+  mutate (gene = apoe4 == "carrier") |>
+  pull(gene) |>
+  mean()
+
+#finding proportion by classifying APOE4 as either True or False so 1 or 0 and then finding the mean. Used AI to help with coding reasoning here
 
 
 new_df
-
-
   
 amlyoid_df =
   read_csv("./data_mci/MCI_amyloid.csv",
