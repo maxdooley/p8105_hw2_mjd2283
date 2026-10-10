@@ -163,10 +163,6 @@ n_amyloid_only
 
 mci_df = inner_join(baseline_df, amyloid_df, by = "id")
 
-write_csv(mci_df, "./data_mci/mci_combined.csv")
-  
-mci_df
-
 
 
 ```
