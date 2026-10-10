@@ -170,9 +170,11 @@ write_csv(mci_df, "./data_mci/mci_combined.csv")
 mci_df
 
 ```
-The `baseline_df` is 479 id participants long and includes variables such as current_age, sex, education, APOE4, and age_at_onset. In comparison, the `amyloid_df` is  2435 rows long representing id participants at baseline `time_0` to `time_8`. 
+The `baseline_df` is 479 id participants long and includes variables such as current_age, sex, education, APOE4, and age_at_onset. In comparison, the `amyloid_df` is  2435 rows long representing id participants at baseline (`time_0`),`time_2`, `time_4`, `time_6,` and `time_8`. 
 
-The `mci_df` contains id values across visits including time_0 which is baseline and then up to time_8, while keeping the overall structure of `baseline_df` with id being the first column. 8 participants are labeled only in the `n_baseline_only`. 16 participants are labeled only in the `n_amyloid_only`.
+The `mci_df` contains id values across visits including time_0 which is baseline and then up to time_8, while keeping the overall structure of `baseline_df` with id being the first column. `mci_df` is 2355 rows representing 471 IDs with 5 visits each. 
+
+8 participants are labeled only in the `n_baseline_only`. 16 participants are labeled only in the `n_amyloid_only`.
 
 
 
