@@ -77,6 +77,8 @@ In line R code here!
 
 ```{r}
 
+library(tidyverse)
+
 baseline_original=
   read_csv("./data_mci/MCI_baseline.csv", 
     skip = 1, na = c (".", "NA", "")) |>
@@ -107,10 +109,10 @@ recruited = nrow(baseline_original)
 included = nrow(baseline_df)
 developed_mci = 
   baseline_df |>
-  filter(is.na(age_at_onset)) |>
-  pull(id)
+  filter(!is.na(age_at_onset)) |>
+  pull(id) |>
   length()
-mean_age = mean(baseline_df$`Current Age`)
+mean_age = mean(baseline_df$current_age, na.rm = TRUE)
 
 baseline_df
   
@@ -123,19 +125,58 @@ filter(sex == "female") |>
   mean()
 
 #finding proportion by classifying APOE4 as either True or False so 1 or 0 and then finding the mean. Used AI to help with code reasoning here
-  
-amlyoid_df =
-  read_csv("./data_mci/MCI_amyloid.csv",
-    skip = 1, na = c (".", "NA", ""))
-  janitor::clean_names()
-  rename(id = study_id) |> 
 
-amlyoid_df
+amyloid_original=
+  read_csv("./data_mci/MCI_amyloid.csv",
+    skip = 1, na = c (".", "NA", "")) |>
+  janitor::clean_names() |>
+  rename(id = study_id) 
+
+amyloid_df =
+  amyloid_original |>
+  pivot_longer(baseline:time_8,
+    names_to = "visit",
+    values_to = "amyloid_ratio") |>
+   mutate(
+    visit = replace(visit, visit == "baseline", "time_0"),
+    visit = factor(visit)) 
+
+#pivot_longer to change so visits all under one column and values under another
+
+n_baseline_only =
+  baseline_df |>
+  filter(!(id %in% amyloid_df$id)) |>
+  pull(id) |>
+  length()
+
+n_baseline_only
+
+n_amyloid_only =
+  amyloid_original |>
+  filter(!(id %in% baseline_df$id)) |>
+  pull(id) |>
+  length()
+
+n_amyloid_only
+
+#used %in% so see if the id value was in the other dataset and ! keeps only those that are not
+
+mci_df = inner_join(baseline_df, amyloid_df, by = "id")
+
+write_csv(mci_df, "./data_mci/mci_combined.csv")
   
-  
-new_df
+mci_df
+
+
 
 ```
+The remaining dataset contains id values across visits including time_0 which is baseline and then up to time_8
+
+8 participants are labeled only in the baseline dataset
+16 participants are labeled only in the amyloid dataset
+
+
+
 
 
 
