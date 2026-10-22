@@ -1,0 +1,31 @@
+---
+title: "practice"
+author: "Max"
+date: "2026-10-18"
+output: html_document
+---
+```{r}
+
+library(tidyverse)
+
+library(p8105.datasets)
+data("ny_noaa")
+
+ny_noaa_df = ny_noaa |>
+  janitor::clean_names() |>
+  separate(date, into = c("year", "month", "day"), convert = TRUE)
+  mutate(
+    tmax = as.numeric(tmax) / 10,
+    tmin = as.numeric(tmin) / 10,
+    prcp = prcp / 10,
+    month = month.name(month)
+  )
+  
+#convert = TRUE from AI helper
+#usually divided by 10 apparently, and months gives you game months
+
+ny_noaa_df
+
+
+```
+
